@@ -1,5 +1,5 @@
 const requireAuth = (accessToken) => {
-  if (accessToken && accessToken.length === 16) {
+  if (accessToken) {
     return true;
   }
   return false;

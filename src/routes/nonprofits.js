@@ -21,6 +21,7 @@ router.post('/create', (req, res) => {
 
 router.get('/:accessToken', (req, res) => {
   const accessToken = req.params.accessToken;
+  console.log(requireAuth(accessToken));
   if (requireAuth(accessToken)) {
     getUserInfo(
       accessToken,
