@@ -34,6 +34,7 @@ router.post('/create', (req, res) => {
 
 router.get('/:accessToken', (req, res) => {
   const accessToken = req.params.accessToken;
+  console.log((0, _requireAuth2.default)(accessToken));
   if ((0, _requireAuth2.default)(accessToken)) {
     (0, _Auth.getUserInfo)(accessToken, user => {
       const nonprofitId = user.app_metadata.nonProfitID;
