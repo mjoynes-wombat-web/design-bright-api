@@ -38,6 +38,7 @@ const whitelist = [
   'https://designbright.org',
   'https://192.168.33.129:3002',
   'http://10.239.236.134:3002',
+  'http://localhost:3002',
 ];
 
 const corsOptions = {
@@ -45,6 +46,7 @@ const corsOptions = {
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
+      console.log(origin);
       callback(new Error('Not allowed by CORS'));
     }
   },

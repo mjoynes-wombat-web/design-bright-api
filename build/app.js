@@ -70,13 +70,14 @@ if (STATUS !== undefined) {
 }
 app.use((0, _compression2.default)());
 
-const whitelist = ['https://192.168.86.200:3002', 'https://192.168.86.200:3000', 'http://192.168.86.200:3002', 'https://192.168.1.9:3002', 'https://165.227.7.212', 'https://www.designbright.org', 'https://designbright.org', 'https://192.168.33.129:3002', 'http://10.239.236.134:3002'];
+const whitelist = ['https://192.168.86.200:3002', 'https://192.168.86.200:3000', 'http://192.168.86.200:3002', 'https://192.168.1.9:3002', 'https://165.227.7.212', 'https://www.designbright.org', 'https://designbright.org', 'https://192.168.33.129:3002', 'http://10.239.236.134:3002', 'http://localhost:3002'];
 
 const corsOptions = {
   origin: (origin, callback) => {
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
+      console.log(origin);
       callback(new Error('Not allowed by CORS'));
     }
   }
