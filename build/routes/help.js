@@ -33,6 +33,11 @@ const { EMAIL_PASS } = _dotenv2.default.config().parsed;
 router.post('/', (req, res) => {
   const { servername } = req.connection;
 
+  console.log(req.connection);
+
+  console.log(servername);
+  console.log(servername.includes('designbright'));
+
   const { firstName, lastName, email, message, subject } = req.body;
   const name = firstName !== undefined ? `${firstName} ${lastName}` : req.body.name;
   const transporter = _nodemailer2.default.createTransport({
