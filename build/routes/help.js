@@ -66,7 +66,7 @@ router.post('/', (req, res) => {
   const supportId = `${emailNum(email)}${new Date().valueOf()}`;
 
   const helpRequestMessage = {
-    from: email,
+    from: [email],
     to: 'ssmith@wombatweb.us',
     subject: servername.includes('designbright') ? `Help Request #${supportId} - ${subject}` : subject,
     text: servername.includes('designbright') ? `
@@ -83,7 +83,7 @@ Design Bright Support
     ` : `
 Hello Simeon,
 
-My name is ${name}.
+My name is ${name} and my email is ${email}.
 
 ${message}
 
