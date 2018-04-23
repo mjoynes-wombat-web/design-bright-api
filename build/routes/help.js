@@ -31,9 +31,7 @@ const { EMAIL_PASS } = _dotenv2.default.config().parsed;
 
 // Accepts a help contact request. Returns a confirmation message.
 router.post('/', (req, res) => {
-  const { servername } = req.connection;
-
-  console.log(req);
+  const servername = req.headers.origin;
 
   const { firstName, lastName, email, message, subject } = req.body;
   const name = firstName !== undefined ? `${firstName} ${lastName}` : req.body.name;
