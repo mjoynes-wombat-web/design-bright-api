@@ -33,10 +33,7 @@ const { EMAIL_PASS } = _dotenv2.default.config().parsed;
 router.post('/', (req, res) => {
   const { servername } = req.connection;
 
-  console.log(req.connection);
-
-  console.log(servername);
-  console.log(servername.includes('designbright'));
+  console.log(req);
 
   const { firstName, lastName, email, message, subject } = req.body;
   const name = firstName !== undefined ? `${firstName} ${lastName}` : req.body.name;
