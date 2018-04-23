@@ -39,6 +39,8 @@ const whitelist = [
   'https://192.168.33.129:3002',
   'http://10.239.236.134:3002',
   'http://localhost:3002',
+  'http://localhost:8000',
+  'https://ssmith-wombatweb.github.io',
 ];
 
 const corsOptions = {

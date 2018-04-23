@@ -31,7 +31,10 @@ const { EMAIL_PASS } = _dotenv2.default.config().parsed;
 
 // Accepts a help contact request. Returns a confirmation message.
 router.post('/', (req, res) => {
+  const { servername } = req.connection;
+
   const { firstName, lastName, email, message, subject } = req.body;
+  const name = firstName !== undefined ? `${firstName} ${lastName}` : req.body.name;
   const transporter = _nodemailer2.default.createTransport({
     service: 'Gmail',
     port: 465,
@@ -63,13 +66,13 @@ router.post('/', (req, res) => {
   const supportId = `${emailNum(email)}${new Date().valueOf()}`;
 
   const helpRequestMessage = {
-    from: 'noreply@designbright.org',
+    from: email,
     to: 'ssmith@wombatweb.us',
-    subject: `Help Request #${supportId} - ${subject}`,
-    text: `
+    subject: servername.includes('designbright') ? `Help Request #${supportId} - ${subject}` : subject,
+    text: servername.includes('designbright') ? `
 A support request for www.designbright.org has been submitted.
 
-Name: ${firstName} ${lastName}
+Name: ${name}
 Email: ${email}
 
 Message:
@@ -77,7 +80,16 @@ ${message}
 
 Thank you,
 Design Bright Support
-    `
+    ` : `
+Hello Simeon,
+
+My name is ${name}.
+
+${message}
+
+Thank you,
+${name}
+  `
   };
 
   transporter.sendMail(helpRequestMessage, (requestMsgErr, requestMsgInfo) => {
@@ -85,11 +97,11 @@ Design Bright Support
       return (0, _response2.default)(requestMsgErr.responseCode, requestMsgErr, 'There was an error sending your support request. Please send an email to help@designbright.org', res);
     } else if (requestMsgInfo) {
       const helpConfirmMessage = {
-        from: 'help@designbright.org',
+        from: servername.includes('designbright') ? 'help@designbright.org' : 'ssmith@wombatweb.us',
         to: [email],
-        subject: `Help Request #${supportId} - ${subject}`,
-        text: `
-Hello ${firstName} ${lastName},
+        subject: servername.includes('designbright') ? `Help Request #${supportId} - ${subject}` : `Thank you for contact me. - ${subject}`,
+        text: servername.includes('designbright') ? `
+Hello ${name},
 
 We have received the request below for help. We look forward to helping you. Please allow 24-48 hours for a response. 
 
@@ -98,6 +110,21 @@ ${message}
 
 Thank you,
 Design Bright Support
+          ` : `
+Hello ${name},
+
+Thank you for reaching out to me. I will get back to you within 24 hours.
+
+Thank you,
+Simeon Smith
+ssmith@wombatweb.us
+
+Original Message:
+Name: ${name}
+Email: ${email}
+Subject: ${subject}
+Message:
+${message}
           `
       };
 
