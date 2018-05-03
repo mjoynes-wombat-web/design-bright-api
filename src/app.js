@@ -41,6 +41,7 @@ const whitelist = [
   'http://localhost:3002',
   'http://localhost:8000',
   'https://ssmith-wombatweb.github.io',
+  'https://www.simeonsmith.me',
 ];
 
 const corsOptions = {
