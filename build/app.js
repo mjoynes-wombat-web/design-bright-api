@@ -48,20 +48,16 @@ var _advisor = require('./routes/advisor');
 
 var _advisor2 = _interopRequireDefault(_advisor);
 
-var _help = require('./routes/help');
-
-var _help2 = _interopRequireDefault(_help);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // Grabbing Environment Variables
-const { API_PORT = 3000, STATUS, HOST = '0.0.0.0', PRIVATE_KEY_FILE, CERTIFICATE_FILE } = _dotenv2.default.config().parsed;
-
-// Setting up the express application.
 
 
 // Import Routes
 // Import Dependencies
+const { API_PORT = 3000, STATUS, HOST = '0.0.0.0', PRIVATE_KEY_FILE, CERTIFICATE_FILE } = _dotenv2.default.config().parsed;
+
+// Setting up the express application.
 const app = (0, _express2.default)();
 
 // Setting the morgan logger to the development status if it exists
@@ -93,7 +89,6 @@ app.use('/api/users', _users2.default);
 app.use('/api/nonprofits', _nonprofits2.default);
 app.use('/api/campaigns', _campaigns2.default);
 app.use('/api/advisor', _advisor2.default);
-app.use('/api/help', _help2.default);
 
 _https2.default.createServer({
   key: _fs2.default.readFileSync(PRIVATE_KEY_FILE),
