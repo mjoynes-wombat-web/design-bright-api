@@ -13,7 +13,6 @@ import users from './routes/users';
 import nonprofits from './routes/nonprofits';
 import campaigns from './routes/campaigns';
 import advisor from './routes/advisor';
-import help from './routes/help';
 
 // Grabbing Environment Variables
 const { API_PORT = 3000, STATUS, HOST = '0.0.0.0', PRIVATE_KEY_FILE, CERTIFICATE_FILE } = dotenv.config().parsed;
@@ -65,7 +64,6 @@ app.use('/api/users', users);
 app.use('/api/nonprofits', nonprofits);
 app.use('/api/campaigns', campaigns);
 app.use('/api/advisor', advisor);
-app.use('/api/help', help);
 
 https.createServer({
   key: fs.readFileSync(PRIVATE_KEY_FILE),
